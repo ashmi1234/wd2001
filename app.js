@@ -10,13 +10,13 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname + "/public")));
 
 app.get("/", async (req, res) => {
-  const allTodo = await Todo.getTodos();
+  const allTodos = await Todo.getTodos();
   if (req.accepts("html")) {
     res.render("index", {
-      allTodo,
+      allTodos,
     });
   } else {
-    res.json(allTodo);
+    res.json(allTodos);
   }
 });
 

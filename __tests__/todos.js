@@ -3,7 +3,7 @@ const request = require("supertest");
 var cheerio = require("cheerio");
 const db = require("../models/index");
 const app = require("../app");
-//const todo = require("../models/todo");
+
 let server, agent;
 
 function extractCsrfToken(res) {
@@ -30,7 +30,7 @@ describe("Todo test suite ", () => {
       completed: false,
       _csrf: csrfToken,
     });
-    expect(response.statusCode).toBe(302); //http status code
+    expect(response.statusCode).toBe(302); 
   });
 
   test("Mark todo as completed (Updating Todo)", async () => {
@@ -56,8 +56,8 @@ describe("Todo test suite ", () => {
       _csrf: csrfToken,
       completed: status,
     });
-    const parsedUpdateResponse = JSON.parse(response.text);
-    expect(parsedUpdateResponse.completed).toBe(true);
+    const UpdateResponse = JSON.parse(response.text);
+    expect(UpdateResponse.completed).toBe(true);
   });
 
   test(" Delete todo using ID", async () => {
@@ -83,7 +83,7 @@ describe("Todo test suite ", () => {
     const response = await agent.put(`todos/${latestTodo.id}`).send({
       _csrf: csrfToken,
     });
-    const parsedUpdateResponse = JSON.parse(response.text);
-    expect(parsedUpdateResponse.completed).toBe(true);
+    const UpdateResponse = JSON.parse(response.text);
+    expect(UpdateResponse.completed).toBe(true);
   });
 });
